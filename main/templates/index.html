@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+      {% if balanco %}   
+      <br>                     
+      <h2 style="margin-left: 35%;">Balanço de {{balanco.mes}} </h2><br>
+      <div class="row py-3">
+        <div class="col-lg-7 mx-auto">
+            <div class="card shadow mb-5">
+                <div class="card-body p-8">
+                    <h4 class="mb-4" style="margin-left: 42%;">Saldo</h4>
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="w-25">Total de receita</th>
+                              <th scope="col" class="w-25">Total de despesas</th>
+                              <th scope="col" class="w-25">Saldo do mês</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{balanco.despesa_total}}</td>
+                              <td>{{balanco.receita_total}}</td>
+                              <td>{{balanco.saldo}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row py-3">
+            <div class="col-lg-7 mx-auto">
+                <div class="card shadow mb-5">
+                    <div class="card-body p-8">
+                        <h4 class="mb-4" style="margin-left: 38%;">Despesas</h4>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                              <thead>
+                                <tr>
+                                  <th scope="col" class="w-25">Descrição</th>
+                                  <th scope="col" class="w-25">Valor</th>
+                                  <th scope="col" class="w-25">Data</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for desp in balanco.despesa_set.all %}
+                                <tr>
+                                  <td>{{desp.descricao}}</td>
+                                  <td>{{desp.valor}} </td>
+                                  <td>{{desp.date}} </td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                  <td><strong>Total:</strong></td>
+                                  <td>{{balanco.despesa_total}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col-lg-7 mx-auto">
+                <div class="card shadow mb-5">
+                    <div class="card-body p-8">
+                        <h4 class="mb-4" style="margin-left: 38%;">Receita</h4>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                              <thead>
+                                <tr>
+                                  <th scope="col" class="w-25">Descrição</th>
+                                  <th scope="col" class="w-25">Valor</th>
+                                  <th scope="col" class="w-25">Data</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for desp in balanco.receita_set.all %}
+                                <tr>
+                                  <td>{{desp.descricao}}</td>
+                                  <td>{{desp.valor}} </td>
+                                  <td>{{desp.date}} </td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                  <td><strong>Total:</strong></td>
+                                  <td>{{balanco.receita_total}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}   
+    </div>
+    </div>
+    {% endblock %}
